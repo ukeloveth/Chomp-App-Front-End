@@ -1,44 +1,103 @@
-import React, {useState} from 'react'
-import img1 from "../../asset/trustpilot.svg"
+import React, { useEffect, useState } from "react";
+import img1 from "../../asset/trustpilot.svg";
 import banner_image from "../../asset/banner_image.jpeg";
 import step_2 from "../../asset/step_2.png";
-import img2 from "../../asset/Pattern_01.svg"
+import img2 from "../../asset/Pattern_01.svg";
 import img3 from "../../asset/pexels-photo-315755.jpeg";
-import "./HomePage.css"
-import img4 from "../../asset/step_2.png"
-import img5 from "../../asset/Step_01.png"
+import "./HomePage.css";
+import img4 from "../../asset/step_2.png";
+import img5 from "../../asset/Step_01.png";
 import img6 from "../../asset/Step_03.png";
-import img7 from "../../asset/Group_Photo.jpeg"
-import ShoppingSection from '../../component/ShoppingSection/ShoppingSection';
-import {burger, drinks, sides} from "../../component/data/Data"
+import ShoppingSection from "../../component/ShoppingSection/ShoppingSection";
+import Footer from "../../component/footer/Footer";
+import { useSelector } from "react-redux";
+import ProductService from "../../services/ProductService";
+import Cart from "../../models/Cart";
+import CartService from "../../services/CartService";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const HomePage = () => {
-  const [burgerState, setBurgerState] = useState(true)
-  const [sideState, setSideState] = useState(false)
+  const [productList, setProductList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [infoMessage, setInfoMessage] = useState(false);
+  const [burgerState, setBurgerState] = useState(true);
+  const [sideState, setSideState] = useState(false);
   const [drinksState, setDrinksState] = useState(false);
+
+  const currentUser = useSelector((state) => state.user);
 
   const burgerHandleState = (e) => {
     e.preventDefault();
     setBurgerState(true);
-      setSideState(false);  
-      setDrinksState(false)
-  }
+    setSideState(false);
+    setDrinksState(false);
+  };
 
-    const sidesHandleState = (e) => {
-      e.preventDefault();
-      setSideState(true);
-        setBurgerState(false);
-        setDrinksState(false);
-    };
+  const sidesHandleState = (e) => {
+    e.preventDefault();
+    setSideState(true);
+    setBurgerState(false);
+    setDrinksState(false);
+  };
 
-       const drinksHandleState = (e) => {
-         e.preventDefault();
-         setDrinksState(true);
-           setSideState(false);
-           setBurgerState(false);
-       };
+  const drinksHandleState = (e) => {
+    e.preventDefault();
+    setDrinksState(true);
+    setSideState(false);
+    setBurgerState(false);
+  };
+
+  useEffect(() => {
+    ProductService.getAllProducts()
+      .then((response) => {
+        setProductList(response.data.content);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const cart = (product, productId) => {
+    if (!currentUser?.userId) {
+      setErrorMessage("You should login to buy a product");
+      return;
+    }
+
+    const cart = new Cart(
+      currentUser.userId,
+      product.productId,
+      product.productName,
+      product.productImage,
+      product.size,
+      product.quantity,
+      product.unitPrice,
+      product.subTotal,
+      product.cartId
+    );
+
+    CartService.addToCart(cart, productId)
+      .then((response) => {
+        console.log(cart);
+        console.log(response);
+        setInfoMessage(true);
+      })
+      .catch((error) => {
+        setErrorMessage(true);
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (infoMessage || errorMessage) {
+        setInfoMessage(false);
+        setErrorMessage(false);
+      }
+    }, 2000);
+  }, [infoMessage, errorMessage]);
   return (
-    <>
+    <div>
       <section className="container homepage">
         <div className="homepage__wrapper">
           <div className="homepage__banner-left">
@@ -52,9 +111,11 @@ const HomePage = () => {
               <br /> all food are made in industry standard and more since the
               2018.
             </p>
-            <button type="button" class="btn btn-success">
-              Place an Order
-            </button>
+            <Link to="/fullMenu">
+              <button type="button" class="btn btn-success">
+                Place an Order
+              </button>
+            </Link>
             <div className="homepage__banner-left_bottom">
               <img src={img1} alt="" />
               <p>
@@ -140,51 +201,124 @@ const HomePage = () => {
               Drinks
             </button>
           </div>
-          <div className="section__four-menu">
+
+          {errorMessage && (
+            <div
+              className="alert alert-danger alert-dismissible fade show d-flex justify-content-between"
+              role="alert"
+            >
+              Unexpected error occured
+            </div>
+          )}
+
+          {infoMessage && (
+            <div
+              className="alert alert-success alert-dismissible fade show d-flex justify-content-between"
+              role="alert"
+            >
+              Added successfully
+            </div>
+          )}
+          <div className="section__four-product">
             {burgerState && (
               <div className="content__wrapper">
-                {burger.map(({ img, title, price, description, btn }) => (
-                  <ShoppingSection
-                    img={img}
-                    title={title}
-                    price={price}
-                    description={description}
-                    btn={btn}
-                  />
-                ))}
+                {productList.map(
+                  ({
+                    productImage,
+                    productName,
+                    productPrice,
+                    size,
+                    categoryName,
+                    productId,
+                    productDescription,
+                  }) => (
+                    <div className="section__four-menu">
+                      {burgerState && categoryName === "Burger" && (
+                        <ShoppingSection
+                          img={productImage}
+                          title={productName}
+                          price={productPrice}
+                          size={size}
+                          cart={cart}
+                          productId={productId}
+                          productDescription={productDescription}
+                          key={productId}
+                        />
+                      )}
+                    </div>
+                  )
+                )}
               </div>
             )}
 
             {sideState && (
               <div className="content__wrapper">
-                {sides.map(({ img, title, price, description, btn }) => (
-                  <ShoppingSection
-                    img={img}
-                    title={title}
-                    price={price}
-                    description={description}
-                    btn={btn}
-                  />
-                ))}
+                {productList.map(
+                  ({
+                    productImage,
+                    productName,
+                    productPrice,
+                    size,
+                    categoryName,
+                    productId,
+                    productDescription,
+                  }) => (
+                    <div className="section__four-menu">
+                      {sideState && categoryName === "Sides" && (
+                        <ShoppingSection
+                          img={productImage}
+                          title={productName}
+                          price={productPrice}
+                          size={size}
+                          cart={cart}
+                          productId={productId}
+                          productDescription={productDescription}
+                          key={productId}
+                        />
+                      )}
+                    </div>
+                  )
+                )}
               </div>
             )}
 
             {drinksState && (
               <div className="content__wrapper">
-                {drinks.map(({ img, title, price, description, btn }) => (
-                  <ShoppingSection
-                    img={img}
-                    title={title}
-                    price={price}
-                    description={description}
-                    btn={btn}
-                  />
-                ))}
+                {productList.map(
+                  ({
+                    productImage,
+                    productName,
+                    productPrice,
+                    size,
+                    categoryName,
+                    productId,
+                    productDescription,
+                  }) => (
+                    <div className="section__four-menu">
+                      {drinksState && categoryName === "Drinks" && (
+                        <ShoppingSection
+                          img={productImage}
+                          title={productName}
+                          price={productPrice}
+                          size={size}
+                          cart={cart}
+                          productId={productId}
+                          productDescription={productDescription}
+                          key={productId}
+                        />
+                      )}
+                    </div>
+                  )
+                )}
               </div>
             )}
           </div>
           <div className="button">
-            <button className="btn full-menu btn-success">See Full Menu</button>
+            <Link to="/fullMenu">
+              <button className="btn full-menu btn-success">
+                See Full Menu
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -233,8 +367,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-    </>
+      <Footer />
+    </div>
   );
-}
+};
 
-export default HomePage
+export default HomePage;

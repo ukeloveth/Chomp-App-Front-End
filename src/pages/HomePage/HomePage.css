@@ -138,7 +138,7 @@
 }
 
 .section__two-left button:hover{
-    border-color: #35b8be;;
+    border-color: #35b8be;
 }
 
 
@@ -256,11 +256,12 @@
     border: none;
 }
 
-.section__four-menu{
+.section__four-product{
     margin-top: 3rem;
     background-image: url(../../asset/homepage_bannerBG.svg);
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
 }
 
 .content__wrapper{
@@ -308,6 +309,10 @@
     object-fit: contain;
     border-radius: 10px;
     box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+}
+
+.alert-success{
+    margin-top: 1.5rem !important;
 }
 
 /* SECTION SIX */

@@ -17,6 +17,7 @@
 .menuCard__left-header{
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
 }
 
 .menuCard__container img{
@@ -29,12 +30,14 @@
 .menuCard__left-header h6{
     font-size: 20px;
     font-weight: 700;
+    margin-bottom: 0rem !important;
 }
 
 .menuCard__left-header p{
     color: #35b8be;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: .5rem !important;
 }
 
 .menuItem__left-bottom{
@@ -46,6 +49,12 @@
     color: #546285;
     font-weight: 400;
     font-size: 16px;
+}
+
+.menuItem__left-bottom a{
+    text-decoration: none;
+    color: #35b8be;
+    margin-top: 1rem;
 }
 
 .menuItem__left-bottom input[type=number]{
