@@ -32,7 +32,6 @@ const ProductSave = forwardRef((props, ref) => {
           !product.productName ||
           !product.categoryName ||
           !product.productPrice ||
-          // !product.quantity ||
           !product.size ||
           !product.productDescription
         ) {
@@ -126,21 +125,6 @@ const ProductSave = forwardRef((props, ref) => {
             />
             <div className="invalid-feedback">Product price is required.</div>
           </div>
-
-          {/* <div className="form-group mb-3">
-            <input
-              type="number"
-              name="quantity"
-              placeholder="Product Quantity"
-              className="form-control"
-              required
-              value={product.quantity}
-              onChange={(e) => handleChange(e)}
-            />
-            <div className="invalid-feedback">
-              Product quantity is required.
-            </div>
-          </div> */}
 
           <div className="form-group mb-3">
             <select

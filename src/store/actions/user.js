@@ -1,4 +1,4 @@
-import { CLEAR_CURRENT_USER, ADD_TO_BASKET, SET_CURRENT_USER } from "../types";
+import { CLEAR_CURRENT_USER, SET_CURRENT_USER } from "../types";
 
 export const setCurrentUser = (user) => {
     return {
@@ -12,10 +12,4 @@ export const clearCurrentUser = () => {
         type: CLEAR_CURRENT_USER
     }
 
-}
-export const addToBasket = (basket) => {
-    return {
-      type: ADD_TO_BASKET,
-      payload: basket,
-    };
 }

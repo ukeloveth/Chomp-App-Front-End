@@ -19,7 +19,6 @@ const Navbar = () => {
     });
   }, []);
 
-  console.log(cartQuantity);
 
   const currentUser = useSelector(state => state.user)
 
@@ -43,19 +42,7 @@ const Navbar = () => {
    {
      title: "Order",
      url: "/fullMenu",
-   },
-   // {
-   //   title: "Company",
-   //   url: "/company",
-   // },
-   // {
-   //   title: "FAQ",
-   //   url: "/faq",
-   // },
-  //  {
-  //    title: "Contact",
-  //    url: "/contact",
-  //  },
+   }
  ];
   return (
     <nav className="navbar ">

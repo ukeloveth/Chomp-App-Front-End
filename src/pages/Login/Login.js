@@ -44,9 +44,6 @@ const Login = () =>{
        e.preventDefault();
 
        setSubmitted(true);
-    //    if (!user.username || !user.password) {
-    //      return;
-    //    }
 
        setLoading(true);
 

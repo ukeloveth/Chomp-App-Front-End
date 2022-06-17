@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import User from "../../models/User";
 import AuthenticationService from "../../services/AuthenticationService";
-import "./signup.css"
+import "./Signup.css"
 import { motion } from "framer-motion";
 
 
@@ -202,60 +202,3 @@ import { motion } from "framer-motion";
 }
 
 export default SignUp;
-
-//  <form className="signup_form">
-//    <div className="signup_input">
-//      <label>
-//        <input
-//          htmlFor="firstName"
-//          typeof="text"
-//          name="firstName"
-//          placeholder="FirstName"
-//        />
-//      </label>
-//    </div>
-//    <div className="signup_input">
-//      <label>
-//        <input
-//          htmlFor="firstName"
-//          typeof="text"
-//          name="firstName"
-//          placeholder="Lastname"
-//        />
-//      </label>
-//    </div>
-//    <div className="signup_input">
-//      <label>
-//        <input
-//          htmlFor="username"
-//          typeof="text"
-//          name="username"
-//          placeholder="Username"
-//        />
-//      </label>
-//    </div>
-//    <div className="signup_input">
-//      <label className="email">
-//        <input htmlFor="email" typeof="email" name="email" placeholder="email" />
-//      </label>
-//    </div>
-//    <div className="signup_input">
-//      <label>
-//        <input
-//          htmlFor="firstName"
-//          typeof="password"
-//          name="password"
-//          placeholder="Password"
-//        />
-//      </label>
-//    </div>
-//    <div className="buttonDiv">
-//      {" "}
-//      <button type="submit" className="signup_btn">
-//        Submit
-//      </button>
-//    </div>
-//    <h4>
-//      Already have an account?. <a href="#">SignIn</a>{" "}
-//    </h4>
-//  </form>;

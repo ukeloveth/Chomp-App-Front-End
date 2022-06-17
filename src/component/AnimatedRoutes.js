@@ -1,13 +1,13 @@
 import React from 'react'
 import HomePage from "../pages/HomePage/HomePage";
-import SignUp from "../pages/signup/SignUp";
+import SignUp from "../pages/Signup/SignUp";
 import Login from "../pages/Login/Login";
 import { AuthGuard } from "../guards/AuthGuard";
 import { Role } from "../models/Role";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import UnauthorizedPage from "../pages/Unauthorized/UnauthorizedPage";
 import NotFoundPage from "../pages/Not-Found/NotFoundPage";
-import ViewUsersDetails from "../pages/userDetails/UserDetails";
+import ViewUsersDetails from "../pages/UserDetails/UserDetails";
 import CartPage from "../pages/Cart/CartPage";
 import SingleProductPage from "../pages/SingleProduct/SingleProductPage";
 import FullMenu from "../pages/FullMenu/FullMenu";

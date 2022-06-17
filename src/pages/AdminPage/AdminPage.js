@@ -39,10 +39,7 @@ const AdminPage = () => {
   };
 
   const editProductRequest = (item) => {
-    // ProductService.updateProduct(item).then((resp) => {
-    //   setSelectedProduct(resp.data);
-    // });
-    // setSelectedProduct(Object.assign({}, item));
+    setSelectedProduct(Object.assign({}, item));
     saveComponent.current?.showProductModal();
   };
 

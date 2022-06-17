@@ -10,7 +10,7 @@ import CartService from '../../services/CartService';
 import { Role } from "../../models/Role";
 
 
-const SingleProductPage =({match})=>{
+const SingleProductPage =()=>{
     const [singleProduct, setSingleProduct] = useState([])
    const [errorMessage, setErrorMessage] = useState("");
    const [infoMessage, setInfoMessage] = useState(false);

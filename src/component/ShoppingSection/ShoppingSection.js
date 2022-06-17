@@ -10,7 +10,6 @@ const ShoppingSection = ({
   img,
   title,
   price,
-  description,
   cart,
   productId,
   key,

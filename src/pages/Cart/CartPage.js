@@ -46,11 +46,9 @@ console.log(resp.data);
         </Link>
         <div className="cart-header_middle">
           <a href="#">Shopping Bag</a>
-          <a href="#">Your Wishlist(0)</a>
+          <a href="#">Your Wishlist</a>
         </div>
-        {/* <button className="btn btn-dark"> */}
         <Payment />
-        {/* </button> */}
       </div>
       <div className="cart__content-container">
         <div className="cart-content__left">

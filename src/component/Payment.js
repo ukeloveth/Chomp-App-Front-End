@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import CartService from '../services/CartService';
 import StripeCheckout from "react-stripe-checkout"
 import { useNavigate } from 'react-router-dom';
-import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,10 +17,9 @@ const Payment = () => {
        });
      }, []);
 
-    //  const priceForStripe = cartTotal.cartTotal * 100;
      const publishablekey =
        "pk_test_51IbB5iJrhAChGpxwxROklguJqVX3OZiG6e2tnHjegK4jwuAFGWmUtGYtLWvDF0EGE4qsI5wfeNguLtPA4XNGJ24I00mo8wN45I";
-       const onToken = (token) => {
+       const onToken = () => {
 
           CartService.clearCart().then(() => {
               navigate("/");
